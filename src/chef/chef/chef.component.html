@@ -1,0 +1,40 @@
+<h1>
+  <span class="blue">&lt;</span>Table<span class="blue">&gt;</span>
+  <span class="yellow">Responsive</span>
+</h1>
+<h2>
+  Created with love by
+  <a href="http://pablogarciafernandez.com" target="_blank"
+    >Pablo García Fernández</a
+  >
+</h2>
+
+<table class="container">
+  <thead>
+    <tr>
+      <th><h1>Sites</h1></th>
+      <th><h1>Views</h1></th>
+      <th><h1>Clicks</h1></th>
+      <th><h1>Average</h1></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let list of commentList">
+      <td>{{ list.name }}</td>
+      <td >{{ list.id }}</td>
+      <td>{{ list.email }}</td>
+      <td>{{ list.body }}</td>
+      <td><button>Delete</button></td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngFor="let list of commentList">
+  {{postValue.id}}<br/>
+  {{postValue.name}}<br/>
+  {{postValue.email}}<br/>
+  {{postValue.body}}
+</div>
+
+
+

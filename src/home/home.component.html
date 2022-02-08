@@ -1,0 +1,12 @@
+<section>
+  <button class="home-btn">
+    <a (click)="nav()"></a>
+  </button>
+  <input type="number" [(ngModel)]="id" (ngModelChange)="getRol($event)" placeholder="role no" />
+  <input [(ngModel)]="name" placeholder="name " />
+</section>
+
+<section>
+  <h1 id="home">Welcome home!</h1>
+  <p>scroll up to go back</p>
+</section>

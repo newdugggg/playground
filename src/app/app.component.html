@@ -1,0 +1,31 @@
+<!-- <p>This is app.component</p> -->
+<!-- <div>
+  <app-contact-us textData="hi this is the data"></app-contact-us><br /><br />
+</div> -->
+<!-- <app-contact-us
+  [textData]="enteredText"
+
+></app-contact-us>
+
+ <img [src]="imgUrl" [alt]="imgUrl" /> -->
+<!-- <input [(ngModel)]="enteredText" /><br /><br /> -->
+
+<!-- [] => parent to child
+() => child to parent
+[()] => two binding -->
+<button (click)="nav()" >Home</button>
+<a routerLinkActive="active-a" #ref [routerLink]="['profile','info',dynVar]" >Profile</a>
+<a routerLinkActive="active-a" routerLink="home" >Home comp</a>
+<a routerLinkActive="active-a" routerLink="/home-comp" >Home comp redirect</a>
+<a routerLinkActive="active-a" routerLink="/info" >Info</a>
+<a routerLinkActive="active-a" routerLink="/contact-us" >Contact us</a>
+<a routerLinkActive="active-a" routerLink="/chef-info" >chef-info</a>
+<a routerLinkActive="active-a" routerLink="/chef" >chef</a>
+<a routerLinkActive="active-a" routerLink="/chef/details"  >chef Details</a>
+<a routerLinkActive="active-a" routerLink="/chef/contact" >chef Contact</a>
+
+<input placeholder="enter name" #name *ngIf="">
+{{rolNumber}}
+<router-outlet></router-outlet>
+
+
