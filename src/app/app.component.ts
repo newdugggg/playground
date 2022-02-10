@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
   ngAfterViewInit() {
     // console.log('This is ngAfterViewInit');
         // console.log(this.input)
-        this.input.nativeElement.value = 'hi';
+        // this.input.nativeElement.value = 'hi';
 
   }
 

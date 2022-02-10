@@ -9,19 +9,19 @@ import { environment } from '../../environments/environment';
   styleUrls: ['./chef.component.scss'],
 })
 export class ChefComponent implements OnInit {
-  commentList: Comments[];
+  commentList: Comments[] | undefined = [];
   postValue: Comments;
   constructor(private aboutUs: AboutusService) {}
 
   ngOnInit(): void {
     this.aboutUs.getComments().subscribe({
       next: (value: Comments[]) => {
-        this.commentList = value.slice(0,10);
+        this.commentList = value.slice(0, 10);
         this.aboutUs.postComments(value[0]).subscribe({
           next: (post: Comments) => {
             this.postValue = post;
-          }
-        })
+          },
+        });
       },
       error: (value) => console.log(value),
       complete: () => console.log('complete'),

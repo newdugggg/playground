@@ -1,0 +1,52 @@
+<br />
+<br />
+<br />
+<br />
+
+<div class="form">
+  <form [formGroup]="info" (submit)="onSubmit()">
+    <nz-radio-group
+      formControlName="ageCheck"
+      (ngModelChange)="setValidatorsForAge()"
+    >
+      <label nz-radio nzValue="yes">yes</label>
+      <label nz-radio nzValue="no">no</label>
+    </nz-radio-group>
+    <input
+      nz-input
+      placeholder="Email"
+      formControlName="email"
+      maxlength="100"
+    />
+    <small *ngIf="info.controls['email'].errors?.['pattern']"
+      >enter valid email</small
+    >
+    <input nz-input placeholder="Name *" formControlName="name" />
+    <small *ngIf="info.controls['name'].errors?.['minlength']" class="block"
+      >Enter name with min 3 char.</small
+    >
+    <small
+      *ngIf="info.controls['name'].errors?.['required'] && info.controls['name'].touched"
+      class="block"
+      >Please enter your name.</small
+    >
+
+    <input nz-input placeholder="age" maxlength="2" formControlName="age" />
+    <small
+      *ngIf="info.controls['age'].errors?.['min'] && info.controls['age'].touched"
+      class="block"
+      >min 18</small
+    >
+    <input nz-input placeholder="Country" formControlName="country" />
+
+    <button
+      type="submit"
+      nz-button
+      nzType="primary"
+      [disabled]="!info.valid"
+      nzDanger
+    >
+      Submit
+    </button>
+  </form>
+</div>
