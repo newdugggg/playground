@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-chef-form',
   templateUrl: './chef-form.component.html',
@@ -8,34 +8,42 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class ChefFormComponent implements OnInit {
   info: FormGroup;
+  countryCode = [
+    { countryName: '+91 India', value: '+91' },
+    { countryName: '+1 USA', value: '+1' },
+    { countryName: '+64  Canada', value: '+64' },
+  ];
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.reactiveForms();
-    this.onSubmit();
-  }
-
-  onSubmit() {
-    const data = {
-      Age: this.info.get('age').value,
-      emailAddress: this.info.controls['email'].value,
-    };
-    this.http.get('https://jsonplaceholder.typicode.com/users').subscribe({
-      next: (response: any) => {
-        if (response) {
-          this.reactiveForms();
-        }
-      },
-      error: () => {},
+    this.reactiveForms({
+      name: '',
+      username: '',
+      email: '',
+      phone: '',
+      website: '',
     });
+    this.getData();
   }
 
-  reactiveForms() {
+  reactiveForms({
+    name = 'Sean',
+    username = '',
+    email = '',
+    phone = '',
+    website = '',
+  }: {
+    name?: string;
+    username?: string;
+    email?: string;
+    phone?: string;
+    website?: string;
+  }) {
     this.info = this.formBuilder.group({
-      ageCheck: ['', Validators.required],
+      name: [name, Validators.required],
       email: [
-        '',
+        email,
         [
           Validators.required,
           Validators.pattern(
@@ -43,21 +51,80 @@ export class ChefFormComponent implements OnInit {
           ),
         ],
       ],
-      name: ['', [Validators.required, Validators.minLength(3)]], // maxLength
-      age: ['', [Validators.min(18)]], // minLength
-      country: ['', Validators.required],
+      username: [username, [Validators.required]], // maxLength
+      phone: [phone, [Validators.required]],
+      countryCode: ['+91'], // minLength
+      website: [website, Validators.required],
+      mobile: this.formBuilder.array([]), //
+    });
+    this.addMobile();
+  }
+  onSubmit() {
+    const {
+      phone: id = '986-08-080',
+      name: title,
+      email: body,
+      website: userId,
+      countryCode
+    } = this.info.value;
+    const data = {
+      id : `${countryCode}-${id}`,
+      title,
+      body,
+      userId,
+    };
+    this.http
+      .put('https://jsonplaceholder.typicode.com/posts/1', data)
+      .subscribe({
+        next: () => {
+          this.reactiveForms({
+            name: '',
+            username: '',
+            email: '',
+            phone: '',
+            website: '',
+          });
+        },
+      });
+      console.log(this.info.value);
+  }
+
+  getData() {
+    this.http.get('https://jsonplaceholder.typicode.com/users').subscribe({
+      next: (response) => {
+        this.reactiveForms(response[0]);
+      },
     });
   }
-  setValidatorsForAge() {
-    if (this.info.controls['ageCheck'].value === 'yes') {
-      this.info.controls['age'].setValidators([Validators.required]);
-      this.info.patchValue({
-        country: 'India',
-        age: '25',
-      });
-    } else {
-      // this.info.controls['age'].removeValidators([Validators.required]);
-      this.info.controls['age'].clearValidators();
-    }
+
+  get mobile() {
+    return this.info.controls['mobile'] as FormArray;
+  }
+
+  addMobile() {
+    this.mobile.push(
+      this.formBuilder.group({
+        mobileNumber: ['', Validators.required],
+        email: '',
+      })
+    );
+  }
+
+  removeNumber(i) {
+    this.mobile.removeAt(i);
   }
 }
+
+// setValidatorsForAge() {
+//   if (this.info.controls['ageCheck'].value === 'yes') {
+//     this.info.controls['age'].setValidators([Validators.required]);
+//     this.info.patchValue({
+//       country: 'India',
+//       age: '25',
+//     });
+//     this.info.controls['age'].setValue(54);
+//   } else {
+//     // this.info.controls['age'].removeValidators([Validators.required]);
+//     this.info.controls['age'].clearValidators();
+//   }
+// }

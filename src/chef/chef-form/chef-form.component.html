@@ -3,15 +3,17 @@
 <br />
 <br />
 
+<nz-select>
+  <nz-option
+    *ngFor="let p of countryCode"
+    [nzValue]="p.countryName"
+    [nzLabel]="p.countryName"
+  ></nz-option>
+</nz-select>
+
 <div class="form">
   <form [formGroup]="info" (submit)="onSubmit()">
-    <nz-radio-group
-      formControlName="ageCheck"
-      (ngModelChange)="setValidatorsForAge()"
-    >
-      <label nz-radio nzValue="yes">yes</label>
-      <label nz-radio nzValue="no">no</label>
-    </nz-radio-group>
+    <input nz-input formControlName="name" />
     <input
       nz-input
       placeholder="Email"
@@ -21,31 +23,51 @@
     <small *ngIf="info.controls['email'].errors?.['pattern']"
       >enter valid email</small
     >
-    <input nz-input placeholder="Name *" formControlName="name" />
-    <small *ngIf="info.controls['name'].errors?.['minlength']" class="block"
+    <input nz-input placeholder="Name *" formControlName="username" />
+    <small *ngIf="info.controls['username'].errors?.['minlength']" class="block"
       >Enter name with min 3 char.</small
     >
     <small
-      *ngIf="info.controls['name'].errors?.['required'] && info.controls['name'].touched"
+      *ngIf="info.controls['username'].errors?.['required'] && info.controls['username'].touched"
       class="block"
       >Please enter your name.</small
     >
 
-    <input nz-input placeholder="age" maxlength="2" formControlName="age" />
+    <nz-select formControlName="countryCode">
+      <nz-option nzCustomContent [nzLabel]="p.countryName" [nzValue]="p.countryName" *ngFor="let p of countryCode">
+        <img [alt]="p.countryName" draggable="false" /> {{ p.countryName }}</nz-option
+      >
+    </nz-select>
+    <input nz-input placeholder="phone" formControlName="phone" />
     <small
-      *ngIf="info.controls['age'].errors?.['min'] && info.controls['age'].touched"
+      *ngIf="info.controls['phone'].errors?.['min'] && info.controls['phone'].touched"
       class="block"
       >min 18</small
     >
-    <input nz-input placeholder="Country" formControlName="country" />
-
+    <input nz-input placeholder="website" formControlName="website" />
+    <div
+      formArrayName="mobile"
+      *ngFor="let list of mobile.controls; index as i"
+    >
+      <div [formGroupName]="i">
+        <input placeholder="Mobile" nz-input formControlName="mobileNumber" />
+        <input formControlName="email" nz-input placeholder="email" />
+        <button *ngIf="i > 0" type="button" nz-button (click)="removeNumber(i)">
+          - Remove
+        </button>
+      </div>
+    </div>
     <button
-      type="submit"
       nz-button
       nzType="primary"
-      [disabled]="!info.valid"
-      nzDanger
+      type="button"
+      (click)="addMobile()"
+      *ngIf="info.value.mobile.length < 6"
     >
+      Add Mobile Numbers
+    </button>
+    <button type="button" nz-button (click)="info.reset()">Reset</button>
+    <button nz-button nzType="primary" nzDanger [disabled]="!info.valid">
       Submit
     </button>
   </form>
