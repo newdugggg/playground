@@ -1,6 +1,8 @@
+import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UpperCasePipe } from '../upper-case.pipe';
 @Component({
   selector: 'app-chef-form',
   templateUrl: './chef-form.component.html',
@@ -8,13 +10,21 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class ChefFormComponent implements OnInit {
   info: FormGroup;
+  amount = 'upper case check';
+  date = new Date().toISOString();
+  currentTime = new Date();
   countryCode = [
     { countryName: '+91 India', value: '+91' },
     { countryName: '+1 USA', value: '+1' },
     { countryName: '+64  Canada', value: '+64' },
   ];
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private http: HttpClient,
+    private casePipe: UpperCasePipe,
+    private datePipe: DatePipe
+  ) {}
 
   ngOnInit(): void {
     this.reactiveForms({
@@ -25,6 +35,8 @@ export class ChefFormComponent implements OnInit {
       website: '',
     });
     this.getData();
+    console.log(this.casePipe.transform('hi', 'up', this.date));
+    console.log(this.datePipe.transform(this.currentTime, 'HH mm ss'))
   }
 
   reactiveForms({
@@ -55,7 +67,7 @@ export class ChefFormComponent implements OnInit {
       phone: [phone, [Validators.required]],
       countryCode: ['+91'], // minLength
       website: [website, Validators.required],
-      mobile: this.formBuilder.array([]), //
+      mobile: this.formBuilder.array([]),
     });
     this.addMobile();
   }
@@ -65,10 +77,10 @@ export class ChefFormComponent implements OnInit {
       name: title,
       email: body,
       website: userId,
-      countryCode
+      countryCode,
     } = this.info.value;
     const data = {
-      id : `${countryCode}-${id}`,
+      id: `${countryCode}-${id}`,
       title,
       body,
       userId,
@@ -86,7 +98,6 @@ export class ChefFormComponent implements OnInit {
           });
         },
       });
-      console.log(this.info.value);
   }
 
   getData() {

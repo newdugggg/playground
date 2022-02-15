@@ -19,6 +19,8 @@
       placeholder="Email"
       formControlName="email"
       maxlength="100"
+      color
+      focus
     />
     <small *ngIf="info.controls['email'].errors?.['pattern']"
       >enter valid email</small
@@ -34,8 +36,14 @@
     >
 
     <nz-select formControlName="countryCode">
-      <nz-option nzCustomContent [nzLabel]="p.countryName" [nzValue]="p.countryName" *ngFor="let p of countryCode">
-        <img [alt]="p.countryName" draggable="false" /> {{ p.countryName }}</nz-option
+      <nz-option
+        nzCustomContent
+        [nzLabel]="p.countryName"
+        [nzValue]="p.countryName"
+        *ngFor="let p of countryCode"
+      >
+        <img [alt]="p.countryName" draggable="false" />
+        {{ p.countryName }}</nz-option
       >
     </nz-select>
     <input nz-input placeholder="phone" formControlName="phone" />
@@ -44,7 +52,13 @@
       class="block"
       >min 18</small
     >
-    <input nz-input placeholder="website" formControlName="website" />
+    <input
+      appTrim
+      color
+      nz-input
+      placeholder="website"
+      formControlName="website"
+    />
     <div
       formArrayName="mobile"
       *ngFor="let list of mobile.controls; index as i"
@@ -71,4 +85,7 @@
       Submit
     </button>
   </form>
+  <input nz-input placeholder="directive" />
+
+  {{ 'Hi, How are you ?' | case: "up":date }}
 </div>
