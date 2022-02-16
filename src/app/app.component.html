@@ -13,22 +13,26 @@
 <!-- [] => parent to child
 () => child to parent
 [()] => two binding -->
-<button (click)="nav()" >Home</button>
-<a routerLinkActive="active-a" #ref [routerLink]="['profile','info',dynVar]" >Profile</a>
-<a routerLinkActive="active-a" routerLink="home" >Home comp</a>
-<a routerLinkActive="active-a" routerLink="/home-comp" >Home comp redirect</a>
-<a routerLinkActive="active-a" routerLink="/info" >Info</a>
-<a routerLinkActive="active-a" routerLink="/contact-us" >Contact us</a>
-<a routerLinkActive="active-a" routerLink="/chef-info" >chef-info</a>
-<a routerLinkActive="active-a" routerLink="/chef" >chef</a>
-<a routerLinkActive="active-a" routerLink="/chef/details"  >chef Details</a>
-<a routerLinkActive="active-a" routerLink="/chef/contact" >chef Contact</a>
-<a routerLinkActive="active-a" routerLink="/chef/ChefFormComponent" >ChefFormComponent</a>
+<button (click)="nav()">Home</button>
+<a routerLinkActive="active-a" #ref [routerLink]="['profile', 'info', dynVar]"
+  >Profile</a
+>
+<a routerLinkActive="active-a" routerLink="home">Home comp</a>
+<a routerLinkActive="active-a" routerLink="/home-comp">Home comp redirect</a>
+<a routerLinkActive="active-a" routerLink="/info">Info</a>
+<a routerLinkActive="active-a" routerLink="/contact-us">Contact us</a>
+<a routerLinkActive="active-a" routerLink="/chef-info">chef-info</a>
+<a routerLinkActive="active-a" routerLink="/chef">chef</a>
+<a routerLinkActive="active-a" routerLink="/chef/details">chef Details</a>
+<a routerLinkActive="active-a" routerLink="/chef/contact">chef Contact</a>
+<a routerLinkActive="active-a" routerLink="/chef/ChefFormComponent"
+  >ChefFormComponent</a
+>
+<h1 (click)="logout()">Logout</h1>
+<h1 (click)="login()">Login</h1>
 
 ChefFormComponent
 
-<input placeholder="enter name" #name *ngIf="">
-{{rolNumber}}
+<input placeholder="enter name" #name *ngIf="" />
+{{ rolNumber }}
 <router-outlet></router-outlet>
-
-

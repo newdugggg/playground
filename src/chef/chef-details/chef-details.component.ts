@@ -8,10 +8,11 @@ import { AboutusService } from 'src/app/about-us/aboutus.service';
 })
 export class ChefDetailsComponent implements OnInit {
 
-  constructor(private aboutusService : AboutusService){}
+  constructor(private aboutusService : AboutusService,){}
 
   ngOnInit(): void {
     console.log(this.aboutusService.getData());
+
 
   }
 

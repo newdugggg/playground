@@ -2,7 +2,7 @@ import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UpperCasePipe } from '../upper-case.pipe';
+import { UpperCasePipe } from '../../app/shared/pipe/upper-case.pipe';
 @Component({
   selector: 'app-chef-form',
   templateUrl: './chef-form.component.html',
@@ -22,8 +22,8 @@ export class ChefFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
-    private casePipe: UpperCasePipe,
-    private datePipe: DatePipe
+    // private casePipe: UpperCasePipe,
+    // private datePipe: DatePipe
   ) {}
 
   ngOnInit(): void {
@@ -35,8 +35,8 @@ export class ChefFormComponent implements OnInit {
       website: '',
     });
     this.getData();
-    console.log(this.casePipe.transform('hi', 'up', this.date));
-    console.log(this.datePipe.transform(this.currentTime, 'HH mm ss'))
+    // console.log(this.casePipe.transform('hi', 'up', this.date));
+    // console.log(this.datePipe.transform(this.currentTime, 'HH mm ss'))
   }
 
   reactiveForms({

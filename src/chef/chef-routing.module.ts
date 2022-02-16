@@ -5,6 +5,7 @@ import { ChefComponent } from './chef/chef.component';
 import { ChefDetailsComponent } from './chef-details/chef-details.component';
 import { ChefContactInfoComponent } from './chef-contact-info/chef-contact-info.component';
 import { ChefFormComponent } from './chef-form/chef-form.component';
+import { AuthGuard } from 'src/app/auth-gaurd.service';
 
 @NgModule({
   declarations: [],
@@ -14,10 +15,22 @@ import { ChefFormComponent } from './chef-form/chef-form.component';
       {
         path: 'chef',
         children: [
-          { path: '', component: ChefComponent },
-          { path: 'details', component: ChefDetailsComponent },
-          { path: 'contact', component: ChefContactInfoComponent },
-          { path: 'ChefFormComponent', component: ChefFormComponent },
+          { path: '', component: ChefComponent, canActivate: [AuthGuard] },
+          {
+            path: 'details',
+            component: ChefDetailsComponent,
+            canActivate: [AuthGuard],
+          },
+          {
+            path: 'contact',
+            component: ChefContactInfoComponent,
+            canActivate: [AuthGuard],
+        },
+          {
+            path: 'ChefFormComponent',
+            component: ChefFormComponent,
+            canActivate: [AuthGuard],
+          },
         ],
       },
     ]),

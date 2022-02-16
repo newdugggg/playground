@@ -6,15 +6,12 @@ import { ChefContactInfoComponent } from './chef-contact-info/chef-contact-info.
 import { ChefRoutingModule } from './chef-routing.module';
 import { ChefHomeComponent } from './chef-home/chef-home.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { ButtonModule } from 'primeng/button';
 import { ChefFormComponent } from './chef-form/chef-form.component';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzSelectModule } from 'ng-zorro-antd/select';
-import { ColorDirective } from './color.directive';
-import { TrimDirective } from './trim.directive';
-import { UpperCasePipe } from './upper-case.pipe';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -23,21 +20,17 @@ import { UpperCasePipe } from './upper-case.pipe';
     ChefContactInfoComponent,
     ChefHomeComponent,
     ChefFormComponent,
-    ColorDirective,
-    TrimDirective,
-    UpperCasePipe,
   ],
   imports: [
     CommonModule,
     ChefRoutingModule,
     NzButtonModule,
-    ButtonModule,
     NzInputModule,
     FormsModule,
     NzRadioModule,
     NzSelectModule,
     ReactiveFormsModule,
+    SharedModule
   ],
-  providers: [UpperCasePipe, DatePipe],
 })
 export class ChefModule {}

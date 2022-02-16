@@ -59,7 +59,7 @@
       placeholder="website"
       formControlName="website"
     />
-    <div
+\    <div
       formArrayName="mobile"
       *ngFor="let list of mobile.controls; index as i"
     >
@@ -87,5 +87,7 @@
   </form>
   <input nz-input placeholder="directive" />
 
-  {{ 'Hi, How are you ?' | case: "up":date }}
+  {{ 'Hi, How are you ?' | replaceWith:'H':'°'   }}
 </div>
+
+<!-- | replaceWith:'o':'p' -->
